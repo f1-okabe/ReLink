@@ -6,11 +6,30 @@ var connection = new signalR.HubConnectionBuilder().withUrl("/chatHub").build();
 document.getElementById("sendButton").disabled = true;
 
 connection.on("ReceiveMessage", function (user, message) {
-    var msg = message.replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/>/g, "&gt;");
-    var encodedMsg = user + " says " + msg;
-    var li = document.createElement("li");
-    li.textContent = encodedMsg;
-    document.getElementById("messagesList").appendChild(li);
+    var userInput = document.getElementById("userInput").value;
+    var msg = ""
+    if (userInput == user)
+    {
+        msg += '<div class="line__right">'
+        msg += '  <div class="text">' + message + '</div>'
+        msg += '</div>'
+    }
+    else
+    {
+        msg += '<div class="line__left">'
+        msg += '  <figure>'
+        msg += '    <img src="icon.png" />'
+        msg += '  </figure>'
+        msg += '  <div class="line__left-text">'
+        msg += '    <div class="name">' + user + '</div>'
+        msg += '    <div class="text">' + message + '</div>'
+        msg += '  </div>'
+        msg += '</div>'
+    }
+
+    var mesagesList = document.getElementById("messagesList");
+    mesagesList.insertAdjacentHTML('beforeend', msg);
+    mesagesList.scrollTop = mesagesList.scrollHeight;
 });
 
 connection.start().then(function () {

@@ -8,6 +8,7 @@ using Microsoft.Extensions.Logging;
 using ReLink.Server.Dao;
 using ReLink.Server.Entiy.DbEntity;
 using ReLink.Server.Models;
+using ReLink.Server.ViewModel;
 
 namespace ReLink.Server.Controllers
 {
@@ -20,11 +21,16 @@ namespace ReLink.Server.Controllers
             _logger = logger;
         }
 
-        public IActionResult Index()
+        public IActionResult Index(string userName)
         {
             DaoD_Message daoD_Message = new DaoD_Message();
             var list = daoD_Message.GetList(1);
-            return View(list);
+
+            ChatViewModel chatViewModel = new ChatViewModel();
+            chatViewModel.UserName = userName;
+            chatViewModel.MessageEntitys = list;
+
+            return View(chatViewModel);
         }
 
         public IActionResult Privacy()
