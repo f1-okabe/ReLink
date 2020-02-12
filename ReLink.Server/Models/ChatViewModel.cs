@@ -4,7 +4,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 
-namespace ReLink.Server.ViewModel
+namespace ReLink.Server.Models
 {
     public class ChatViewModel
     {
