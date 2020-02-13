@@ -18,7 +18,7 @@ connection.on("ReceiveMessage", function (user, message) {
     {
         msg += '<div class="line__left">'
         msg += '  <figure>'
-        msg += '    <img src="icon.png" />'
+        msg += '    <img src="~/icon.png" />'
         msg += '  </figure>'
         msg += '  <div class="line__left-text">'
         msg += '    <div class="name">' + user + '</div>'
